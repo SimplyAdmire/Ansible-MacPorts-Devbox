@@ -9,3 +9,7 @@
 - command: mv composer.phar /opt/local/bin/composer
   sudo: yes
   when: (not composer_path.stat.exists)
+
+- command: /opt/local/bin/composer self-update
+  sudo: yes
+  when: (composer_path.stat.exists)
