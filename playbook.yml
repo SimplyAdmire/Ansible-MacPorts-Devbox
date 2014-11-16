@@ -6,7 +6,7 @@
     database_user: 'root'
     database_password: 'password'
 
-  tasks:
+  pre_tasks:
     - include: tasks/_base.yml
 
   roles:
