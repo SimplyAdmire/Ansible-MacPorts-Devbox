@@ -1,0 +1,17 @@
+---
+
+- stat: path=/Applications/wkhtmltopdf.app
+  register: wkhtmltopdf_path
+  changed_when: false
+
+- get_url: url=https://wkhtmltopdf.googlecode.com/files/wkhtmltopdf.dmg dest=/tmp/wkhtmltopdf.dmg
+  when: (not wkhtmltopdf_path.stat.exists)
+
+- command: hdiutil attach /tmp/wkhtmltopdf.dmg
+  when: (not wkhtmltopdf_path.stat.exists)
+
+- command: cp -R /Volumes/wkhtmltopdf/wkhtmltopdf.app /Applications/
+  sudo: yes
+  when: (not wkhtmltopdf_path.stat.exists)
+
+- lineinfile: dest=~/.zshrc line='export PATH="/Applications/wkhtmltopdf.app/Contents/MacOS/:$PATH"'
