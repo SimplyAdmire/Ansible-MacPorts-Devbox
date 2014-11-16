@@ -13,3 +13,6 @@
   changed_when: false
 
 - lineinfile: dest=~/.zshrc line='export PATH="{{ rvm_gemdir.stdout }}/bin:$PATH"'
+
+- shell: '~/.rvm/bin/rvm all do gem install {{ item }}'
+  with_items: gems
