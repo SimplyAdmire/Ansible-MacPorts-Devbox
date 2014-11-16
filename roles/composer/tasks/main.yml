@@ -1,0 +1,11 @@
+---
+
+- stat: path=/opt/local/bin/composer
+  register: composer_path
+
+- shell: "curl -sS https://getcomposer.org/installer | php"
+  when: (not composer_path.stat.exists)
+
+- command: mv composer.phar /opt/local/bin/composer
+  sudo: yes
+  when: (not composer_path.stat.exists)

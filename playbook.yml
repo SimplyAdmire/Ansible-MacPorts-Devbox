@@ -21,3 +21,4 @@
     - nodejs
     - couchdb
     - elasticsearch
+    - composer
