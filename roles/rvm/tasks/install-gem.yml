@@ -1,0 +1,7 @@
+- shell: 'which {{ gem }}'
+  changed_when: false
+  ignore_errors: true
+  register: gem_installed
+
+- shell: '~/.rvm/bin/rvm all do gem install {{ gem }}'
+  when: (not gem_installed.rc == 0)

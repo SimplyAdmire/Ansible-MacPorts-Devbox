@@ -14,5 +14,5 @@
 
 - lineinfile: dest=~/.zshrc line='export PATH="{{ rvm_gemdir.stdout }}/bin:$PATH"'
 
-- shell: '~/.rvm/bin/rvm all do gem install {{ item }}'
-  with_items: gems
+- include: install-gem.yml gem=bundler
+- include: install-gem.yml gem=compass
