@@ -1,0 +1,18 @@
+---
+
+- shell: rvm gemdir
+  register: rvm_gemdir
+  changed_when: false
+
+- stat: path={{ rvm_gemdir.stdout }}/bin/mailcatcher
+  register: mailcatcher_path
+
+- shell: ~/.rvm/bin/rvm all do gem install mailcatcher
+  when: (not mailcatcher_path.stat.exists)
+
+- template: src=me.mailcatcher.plist dest=~/Library/LaunchAgents/me.mailcatcher.plist
+  notify:
+    - start mailcatcher
+
+- template: src=main.cf dest=/etc/postfix/main.cf backup=yes
+  sudo: yes
