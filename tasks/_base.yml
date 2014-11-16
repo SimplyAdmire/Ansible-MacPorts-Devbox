@@ -1,0 +1,9 @@
+---
+
+- macports: name={{ item }} state=present
+  sudo: yes
+  with_items:
+    - tree
+    - mc
+    - wget
+    - bash-completion
