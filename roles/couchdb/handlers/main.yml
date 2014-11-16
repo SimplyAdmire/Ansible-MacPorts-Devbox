@@ -1,0 +1,12 @@
+---
+
+- name: start couchdb
+  command: port load couchdb
+  sudo: yes
+
+- name: restart couchdb
+  command: 'port {{ item }} couchdb'
+  sudo: yes
+  with_items:
+    - unload
+    - load

@@ -19,3 +19,4 @@
     - dnsmasq
     - wkhtmltopdf
     - nodejs
+    - couchdb

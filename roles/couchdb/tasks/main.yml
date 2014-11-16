@@ -1,0 +1,6 @@
+---
+
+- macports: name=couchdb state=present
+  sudo: yes
+  notify:
+    - start couchdb
