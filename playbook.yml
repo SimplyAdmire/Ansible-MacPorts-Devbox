@@ -2,6 +2,10 @@
 
 - hosts: all
 
+  vars:
+    database_user: 'root'
+    database_password: 'password'
+
   tasks:
     - include: tasks/_base.yml
 
@@ -9,3 +13,4 @@
     - git
     - oh-my-zsh
     - rvm
+    - mariadb

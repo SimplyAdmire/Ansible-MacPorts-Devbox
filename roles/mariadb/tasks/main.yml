@@ -1,0 +1,31 @@
+---
+
+- stat: path=/opt/local/lib/mariadb
+  register: mariadb_path
+
+- macports: name=mariadb-server state=present
+  sudo: yes
+  when: (not mariadb_path.stat.exists)
+  notify:
+    - start mariadb
+
+- command: /opt/local/lib/mariadb/bin/mysql_install_db --user=mysql
+  sudo: yes
+  when: (not mariadb_path.stat.exists)
+
+- command: "/opt/local/lib/mariadb/bin/mysqladmin -u {{ database_user }} password '{{ database_password }}'"
+  when: (not mariadb_path.stat.exists)
+
+- lineinfile: 'dest=/opt/local/etc/mariadb/my.cnf line="{{ item.line }}"'
+  sudo: yes
+  with_items:
+    - { line: '[mysqld]' }
+    - { line: 'collation-server=utf8_unicode_ci' }
+    - { line: "init-connect='SET NAMES utf8'" }
+    - { line: 'character-set-server=utf8' }
+    - { line: 'skip-character-set-client-handshake' }
+  notify:
+    - restart mariadb
+
+- template: src=.my.cnf dest=~/.my.cnf
+- lineinfile: dest=~/.zshrc line="export PATH=$PATH:/opt/local/lib/mariadb/bin/"

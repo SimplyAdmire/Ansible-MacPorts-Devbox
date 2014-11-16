@@ -1,0 +1,12 @@
+---
+
+- name: start mariadb
+  command: port load mariadb-server
+  sudo: yes
+
+- name: restart mariadb
+  command: "{{item}}"
+  sudo: yes
+  with_items:
+    - port unload mariadb-server
+    - port load mariadb-server
