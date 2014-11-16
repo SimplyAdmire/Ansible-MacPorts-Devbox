@@ -1,15 +1,4 @@
 ---
 
-- name: start postfix
-  command: port load postfix
-  sudo: yes
-
-- name: restart postfix
-  command: "{{item}}"
-  sudo: yes
-  with_items:
-    - port unload postfix
-    - port load postfix
-
 - name: start mailcatcher
   command: launchctl load ~/Library/LaunchAgents/me.mailcatcher.plist
