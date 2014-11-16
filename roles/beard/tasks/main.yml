@@ -1,0 +1,15 @@
+---
+
+- stat: path=/opt/local/bin/beard
+  register: beard_path
+
+- shell: "wget https://github.com/mneuhaus/Beard/releases/download/1.0.2/beard-1.0.2.phar"
+  when: (not beard_path.stat.exists)
+
+- command: mv beard-1.0.2.phar /opt/local/bin/beard
+  sudo: yes
+  when: (not beard_path.stat.exists)
+
+- command: chmod +x /opt/local/bin/beard
+  sudo: yes
+  when: (not beard_path.stat.exists)
