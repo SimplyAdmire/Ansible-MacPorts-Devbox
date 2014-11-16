@@ -1,0 +1,8 @@
+---
+
+- macports: name=npm state=present
+  sudo: yes
+
+- shell: 'npm install -g {{ item }}'
+  sudo: yes
+  with_items: global
