@@ -1,0 +1,12 @@
+---
+  
+- macports: name=git state=present
+  sudo: yes
+
+- name: configure color
+  command: git config --global color.ui true
+  when: (not 'git.config --global color.ui == true')
+  
+- name: configure gitignore
+  command: git config --global core.excludesfile ~/.gitignore
+  when: (not 'git.config --global core.excludesfile == ~/.gitignore')

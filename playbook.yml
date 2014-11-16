@@ -4,3 +4,6 @@
 
   tasks:
     - include: tasks/_base.yml
+
+  roles:
+    - git
