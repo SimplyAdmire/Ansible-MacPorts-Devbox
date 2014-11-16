@@ -16,3 +16,4 @@
     - mariadb
     - php
     - mailcatcher
+    - dnsmasq

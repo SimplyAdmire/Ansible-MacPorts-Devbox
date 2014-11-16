@@ -1,0 +1,18 @@
+---
+
+- macports: name=dnsmasq state=present
+  sudo: yes
+  notify:
+    - start dnsmasq
+
+- template: src=dnsmasq.conf dest=/opt/local/etc/dnsmasq.conf
+  sudo: yes
+  notify:
+    - restart dnsmasq
+
+- file: path=/etc/resolver/ state=directory
+  sudo: yes
+
+- template: 'src=resolver dest=/etc/resolver/{{ item }}'
+  sudo: yes
+  with_items: hosts

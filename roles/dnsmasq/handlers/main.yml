@@ -1,0 +1,13 @@
+---
+
+- name: start dnsmasq
+  command: port load dnsmasq
+  sudo: yes
+
+- name: restart dnsmasq
+  command: '{{ item }}'
+  sudo: yes
+  with_items:
+    - port unload dnsmasq
+    - port load dnsmasq
+
