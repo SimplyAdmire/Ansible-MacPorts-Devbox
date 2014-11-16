@@ -1,0 +1,25 @@
+---
+
+packages:
+  - php55-fpm
+  - php55-yaml
+  - php55-xdebug
+  - php55-xhprof
+  - php55-sqlite
+  - php55-soap
+  - php55-redis
+  - php55-postgresql
+  - php55-openssl
+  - php55-oauth
+  - php55-mysql
+  - php55-mbstring
+  - php55-ldap
+  - php55-imagick
+  - php55-igbinary
+  - php55-iconv
+  - php55-http
+  - php55-gettext
+  - php55-gd
+  - php55-curl
+
+timezone: 'Europe/Amsterdam'

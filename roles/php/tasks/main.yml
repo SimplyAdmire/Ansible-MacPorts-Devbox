@@ -1,0 +1,28 @@
+---
+
+- name: Install php packages
+  macports: name={{ item }} state=present
+  with_items: packages
+  sudo: yes
+
+- shell: test -L /usr/bin/php
+  register: php_isSymlink
+  ignore_errors: true
+  changed_when: "php_isSymlink.rc != 0"
+
+- name: Replace default OSX php version by symlink to MacPort managed version
+  shell: rm -rf /usr/bin/php && ln -s /opt/local/bin/php55 /usr/bin/php
+  sudo: yes
+  when: (php_isSymlink.rc != 0)
+
+- stat: path=/opt/local/etc/php55/php.ini
+  register: phpini_path
+
+- shell: cp /opt/local/etc/php55/php.ini-development /opt/local/etc/php55/php.ini
+  sudo: yes
+  when: (not phpini_path.stat.exists)
+  notify:
+    - restart php-fpm
+
+- lineinfile: 'dest=/opt/local/etc/php55/php.ini regexp="date\.timezone = .*" line="date.timezone = {{ timezone }}"'
+  sudo: yes

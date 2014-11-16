@@ -1,0 +1,12 @@
+---
+
+- name: start php-fpm
+  command: port load php55-fpm
+  sudo: yes
+
+- name: restart php-fpm
+  command: "{{item}}"
+  sudo: yes
+  with_items:
+    - port unload php55-fpm
+    - port load php55-fpm
