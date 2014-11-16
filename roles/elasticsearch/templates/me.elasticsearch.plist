@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>me.elasticsearch</string>
+	 <key>EnvironmentVariables</key>
+	<dict>
+		<key>ES_HEAP_SIZE</key>
+		<string>256m</string>
+		<key>ES_MIN_MEM</key>
+		<string>128m</string>
+		<key>ES_MAX_MEM</key>
+		<string>512m</string>
+	</dict>
+	<key>ProgramArguments</key>
+	<array>
+		<string>sh</string>
+		<string>-i</string>
+		<string>-c</string>
+		<string>$SHELL --login -c "bin/elasticsearch start"</string>
+	</array>
+	<key>KeepAlive</key>
+	<false/>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>WorkingDirectory</key>
+	<string>/opt/local/share/elasticsearch/elasticsearch/</string>
+</dict>
+</plist>

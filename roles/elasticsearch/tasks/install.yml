@@ -1,0 +1,34 @@
+---
+
+- file: path=/opt/local/share/elasticsearch state=directory
+  sudo: yes
+
+- get_url: url=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.0.tar.gz dest=/tmp/elasticsearch.tar.gz
+
+- unarchive: src=/tmp/elasticsearch.tar.gz dest=/opt/local/share/elasticsearch
+  sudo: yes
+
+- file: src=/opt/local/share/elasticsearch/elasticsearch-1.4.0/ dest=/opt/local/share/elasticsearch/elasticsearch state=link
+  sudo: yes
+
+- file: path=/opt/local/share/elasticsearch/elasticsearch/logs state=directory
+  sudo: yes
+
+- command: chown -R root:wheel /opt/local/share/elasticsearch/elasticsearch
+  sudo: yes
+
+- lineinfile: 'dest=/opt/local/share/elasticsearch/elasticsearch/config/elasticsearch.yml line="{{ item }}"'
+  with_items:
+    - 'script.groovy.sandbox.class_whitelist: java.util.LinkedHashMap'
+    - 'script.groovy.sandbox.receiver_whitelist:  java.util.Iterator, java.lang.Object, java.util.Map, java.util.Map$Entry'
+    - 'network.bind_host: 127.0.0.1'
+  sudo: yes
+
+- command: chown -R root:wheel /opt/local/share/elasticsearch/elasticsearch
+  sudo: yes
+
+- template: src=me.elasticsearch.plist dest=/Library/LaunchAgents/me.elasticsearch.plist
+  sudo: yes
+  notify:
+    - start elasticsearch
+

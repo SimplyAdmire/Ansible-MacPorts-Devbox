@@ -1,0 +1,7 @@
+---
+
+- stat: path=/opt/local/share/elasticsearch
+  register: elasticsearch_path
+
+- include: install.yml
+  when: (not elasticsearch_path.stat.exists)
