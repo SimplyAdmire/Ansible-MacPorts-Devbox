@@ -3,6 +3,5 @@
 - macports: name=npm state=present
   sudo: yes
 
-- shell: 'npm install -g {{ item }}'
-  sudo: yes
-  with_items: global
+- include: install-package.yml command=grunt package=grunt-cli
+- include: install-package.yml command=bower package=bower

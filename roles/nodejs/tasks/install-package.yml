@@ -1,0 +1,8 @@
+- shell: 'which {{ command }}'
+  changed_when: false
+  ignore_errors: true
+  register: package_installed
+
+- shell: 'npm install -g {{ package }}'
+  sudo: yes
+  when: (not package_installed.rc == 0)
