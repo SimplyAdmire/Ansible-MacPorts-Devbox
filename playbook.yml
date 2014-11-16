@@ -7,3 +7,4 @@
 
   roles:
     - git
+    - oh-my-zsh
