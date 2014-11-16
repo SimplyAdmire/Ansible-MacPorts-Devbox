@@ -5,8 +5,8 @@
   sudo: yes
 
 - name: restart php-fpm
-  command: "{{item}}"
+  command: 'port {{ item }} php55-fpm'
   sudo: yes
   with_items:
-    - port unload php55-fpm
-    - port load php55-fpm
+    - unload
+    - load
