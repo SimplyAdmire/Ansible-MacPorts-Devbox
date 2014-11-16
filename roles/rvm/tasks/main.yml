@@ -1,0 +1,8 @@
+---
+
+- stat: path=~/.rvm
+  register: rvm_path
+
+- name: Install RVM
+  shell: curl -sSL https://get.rvm.io | bash -s stable --ruby
+  when: (not rvm_path.stat.exists)

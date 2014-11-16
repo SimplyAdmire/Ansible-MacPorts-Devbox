@@ -8,3 +8,4 @@
   roles:
     - git
     - oh-my-zsh
+    - rvm
