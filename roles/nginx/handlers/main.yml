@@ -1,0 +1,12 @@
+---
+
+- name: start nginx
+  command: port load nginx
+  sudo: yes
+
+- name: restart nginx
+  command: 'port {{ item }} nginx'
+  sudo: yes
+  with_items:
+    - unload
+    - load

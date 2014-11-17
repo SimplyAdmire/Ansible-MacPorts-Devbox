@@ -26,3 +26,21 @@
 
 - lineinfile: 'dest=/opt/local/etc/php55/php.ini regexp="date\.timezone = .*" line="date.timezone = {{ timezone }}"'
   sudo: yes
+
+- template: src=php-fpm.conf dest=/opt/local/etc/php55/php-fpm.conf
+  sudo: yes
+  notify:
+    - restart php-fpm
+
+- file: path=/opt/local/etc/php55/pools.d/ state=directory
+  sudo: yes
+
+- template: src=pools/dev.conf dest=/opt/local/etc/php55/pools.d/dev.conf
+  sudo: yes
+  notify:
+    - restart php-fpm
+
+- template: src=pools/flow.conf dest=/opt/local/etc/php55/pools.d/flow.conf
+  sudo: yes
+  notify:
+    - restart php-fpm
