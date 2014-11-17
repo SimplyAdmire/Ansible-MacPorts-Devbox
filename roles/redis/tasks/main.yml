@@ -1,0 +1,6 @@
+---
+
+- macports: name=redis state=present
+  sudo: yes
+  notify:
+    - start redis

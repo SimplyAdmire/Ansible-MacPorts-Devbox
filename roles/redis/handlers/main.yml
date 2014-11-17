@@ -1,0 +1,5 @@
+---
+
+- name: start redis
+  command: port load redis
+  sudo: yes
