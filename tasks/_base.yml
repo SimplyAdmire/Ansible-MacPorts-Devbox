@@ -7,3 +7,6 @@
     - mc
     - wget
     - bash-completion
+
+- lineinfile: dest=/etc/hosts line="127.0.0.1 dev"
+  sudo: yes
