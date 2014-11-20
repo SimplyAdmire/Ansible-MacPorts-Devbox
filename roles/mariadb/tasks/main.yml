@@ -29,3 +29,8 @@
 
 - template: src=.my.cnf dest=~/.my.cnf
 - lineinfile: dest=~/.zshrc line="export PATH=$PATH:/opt/local/lib/mariadb/bin/"
+
+- lineinfile: dest=/opt/local/etc/mariadb/macports-default.cnf regexp="^skip-networking" line="#skip-networking"
+  sudo: yes
+  notify:
+    - restart mariadb
