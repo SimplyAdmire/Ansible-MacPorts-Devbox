@@ -24,8 +24,15 @@
   notify:
     - restart php-fpm
 
-- lineinfile: 'dest=/opt/local/etc/php55/php.ini regexp="date\.timezone = .*" line="date.timezone = {{ timezone }}"'
+- lineinfile: 'dest=/opt/local/etc/php55/php.ini regexp="{{ item.regexp }}" line="{{ item.line }}"'
   sudo: yes
+  with_items:
+    - {line: 'memory_limit = 512M', regexp: 'memory_limit = .*'}
+    - {line: 'date.timezone = {{ timezone }}', regexp: 'date\.timezone = .*'}
+    - {line: 'upload_max_filesize = 100M', regexp: 'upload_max_filesize = .*'}
+    - {line: 'post_max_size = 100M', regexp: 'post_max_size = .*'}
+  notify:
+    - restart php-fpm
 
 - template: src=php-fpm.conf dest=/opt/local/etc/php55/php-fpm.conf
   sudo: yes
@@ -41,6 +48,12 @@
     - restart php-fpm
 
 - template: src=pools/flow.conf dest=/opt/local/etc/php55/pools.d/flow.conf
+  sudo: yes
+  notify:
+    - restart php-fpm
+
+# Xdebug settings
+- lineinfile: 'dest=/opt/local/var/db/php55/xdebug.ini line="xdebug.max_nesting_level = 250"'
   sudo: yes
   notify:
     - restart php-fpm
