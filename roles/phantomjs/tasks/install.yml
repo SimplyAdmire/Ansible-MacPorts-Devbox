@@ -1,0 +1,5 @@
+---
+
+- macports: name=fontconfig state=present
+
+- macports: name=freetype state=present
