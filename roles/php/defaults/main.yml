@@ -21,5 +21,6 @@ packages:
   - php55-gettext
   - php55-gd
   - php55-curl
+  - php55-mcrypt
 
 timezone: 'Europe/Amsterdam'
