@@ -17,6 +17,16 @@
   sudo: yes
   when: (php_isSymlink.rc != 0)
 
+- shell: test -L /opt/local/bin/php
+  register: php_isSymlink
+  ignore_errors: true
+  changed_when: "php_isSymlink.rc != 0"
+
+- name: Make /opt/local/bin/php symlink for Flows PHP binary resolving
+  shell: ln -s /opt/local/bin/php55 /opt/local/bin/php
+  sudo: yes
+  when: (php_isSymlink.rc != 0)
+
 - stat: path=/opt/local/etc/php55/php.ini
   register: phpini_path
 
