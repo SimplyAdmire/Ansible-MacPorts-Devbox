@@ -22,5 +22,6 @@ packages:
   - php55-gd
   - php55-curl
   - php55-mcrypt
+  - php55-posix
 
 timezone: 'Europe/Amsterdam'
