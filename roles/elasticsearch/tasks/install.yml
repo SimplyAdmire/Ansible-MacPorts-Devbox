@@ -27,8 +27,3 @@
 - command: chown -R root:wheel /opt/local/share/elasticsearch/elasticsearch
   sudo: yes
 
-- template: src=me.elasticsearch.plist dest=/Library/LaunchAgents/me.elasticsearch.plist
-  sudo: yes
-  notify:
-    - start elasticsearch
-
