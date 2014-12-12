@@ -6,7 +6,7 @@
 - include: install.yml
   when: (not elasticsearch_path.stat.exists)
 
-- template: src=me.elasticsearch.plist dest=/Library/LaunchAgents/me.elasticsearch.plist
+- template: src=me.elasticsearch.plist dest=/Library/LaunchDaemons/me.elasticsearch.plist
   sudo: yes
   notify:
     - start elasticsearch
