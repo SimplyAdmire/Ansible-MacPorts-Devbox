@@ -1,26 +1,38 @@
 ---
 
 - file: path=~/Sites state=directory
+  tags:
+    - nginx
 
 - macports: name=nginx state=present
   sudo: yes
   notify:
     - start nginx
+  tags:
+    - nginx
 
 - file: path=/opt/local/etc/nginx/sites-enabled state=directory
   sudo: yes
+  tags:
+    - nginx
 
 - template: src=nginx.conf dest=/opt/local/etc/nginx/nginx.conf
   sudo: yes
   notify:
     - restart nginx
+  tags:
+    - nginx
 
 - template: src=sites/flow.conf dest=/opt/local/etc/nginx/sites-enabled/flow.conf
   sudo: yes
   notify:
     - restart nginx
+  tags:
+    - nginx
 
 - template: src=sites/dev.conf dest=/opt/local/etc/nginx/sites-enabled/dev.conf
   sudo: yes
   notify:
     - restart nginx
+  tags:
+    - nginx
