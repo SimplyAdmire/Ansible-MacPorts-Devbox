@@ -10,6 +10,6 @@
 - name: Flow oh-my-zsh plugin
   git: repo=git://github.com/sandstorm/oh-my-zsh-flow3-plugin.git dest=~/.oh-my-zsh/custom/plugins/flow
   when: (not zsh_path.stat.exists)
- 
+
 - name: 'Enable flow plugin'
-  action: 'lineinfile dest=~/.zshrc regexp="plugins=\(git\)" line="plugins=(git flow)" backrefs=yes state=present'
+  lineinfile: dest=~/.zshrc regexp="plugins=\(git\)" line="plugins=(git flow)" backrefs=yes state=present
