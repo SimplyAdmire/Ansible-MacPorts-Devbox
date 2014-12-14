@@ -1,0 +1,7 @@
+---
+
+- name: 'Add Ansible module path'
+  lineinfile: dest=~/.zshrc line='export ANSIBLE_LIBRARY="/opt/local/share/ansible/:{{ inventory_dir }}/modules/"' state=present
+
+- lineinfile: dest=~/.zshrc line='export DO_API_KEY=<My v1 API key>' regexp='^export DO_API_KEY=.*' state=present
+- lineinfile: dest=~/.zshrc line='export DO_CLIENT_ID=<My v1 Client key>' regexp='^export DO_CLIENT_ID=.*' state=present

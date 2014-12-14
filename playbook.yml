@@ -26,3 +26,5 @@
     - nginx
     - redis
     - phantomjs
+    - python
+    - ansible

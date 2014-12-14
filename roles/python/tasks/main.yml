@@ -1,0 +1,22 @@
+---
+
+- macports: name=python state=present
+  sudo: yes
+  tags:
+    - python
+
+- shell: easy_install pip
+  sudo: yes
+  tags:
+    - python
+
+- shell: pip install {{ item }}
+  sudo: yes
+  with_items:
+    - paramiko
+    - PyYAML
+    - jinja2
+    - httplib2
+    - dopy
+  tags:
+    - python

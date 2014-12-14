@@ -13,9 +13,10 @@ It is okay to use python as well to install Ansible if you prefer.
 Installing the devbox
 ---------------------
 
-To install your devbox run the following command:
+To install your devbox run the following commands:
 
 ```
+  cd devbox
   ansible-playbook playbook.yml -i hosts -K
 ```
 
