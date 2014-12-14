@@ -22,7 +22,7 @@ To install your devbox run the following command:
 The `-K` parameter will be helpful if you run into issues with sudo, but might not be needed.
 If errors occur - just run the command again.
 
-What will yuo get
+What will you get
 -----------------
 
 The result will be a development setup which uses nginx and looks for projects in your personal `Sites` folder.
