@@ -20,7 +20,6 @@
     - mariadb
 
 - command: "/opt/local/lib/mariadb/bin/mysqladmin -u {{ database_user }} password '{{ database_password }}'"
-  when: (not mariadb_path.stat.exists)
   tags:
     - mariadb
 
