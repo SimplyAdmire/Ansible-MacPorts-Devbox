@@ -10,6 +10,10 @@ To install MacPorts, XCode command line tools and Ansible you can run the ./prep
 Please make sure you installed XCode from the app store before.
 It is okay to use python as well to install Ansible if you prefer.
 
+It is important you install Java before running the playbook to make sure Elasticsearch can
+actually start. Make sure you download Java from Oracle or so, not the apple one as that one
+will be too old.
+
 Installing the devbox
 ---------------------
 
