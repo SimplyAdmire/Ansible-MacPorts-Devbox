@@ -1,5 +1,5 @@
 ---
 
 - name: start elasticsearch
-  command: launchctl load /Library/LaunchAgents/me.elasticsearch.plist
+  command: launchctl load /Library/LaunchDaemons/me.elasticsearch.plist
   sudo: yes
