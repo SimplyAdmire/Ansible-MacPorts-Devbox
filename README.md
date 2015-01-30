@@ -33,3 +33,28 @@ What will you get
 The result will be a development setup which uses nginx and looks for projects in your personal `Sites` folder.
 Please check the nginx configuration to see where nginx is really looking for your projects to exist, since there
 are multiple types configured (.dev for normal webdevelopment, .flow for neos and flow projects).
+
+Ansible vault
+-------------
+
+If you fork this repo or want to commit yml files to git it's a good idea to encrypt the variable
+files using ansible-vault. But passing in a password might be quite a hazzle all the time, so
+make sure nobody can touch your little secret password file and use the following command:
+
+```
+  echo "my vault password" > ~/.ansible_vault
+  chmod 600 ~/.ansible_vault
+```
+
+Now you can add `--vault-password-file ~/.ansible_vault` to your ansible-playbook commands to have
+a bit of security as long as you don't compromise the `~/.ansible_vault` file of course ;-)
+
+Local variables
+---------------
+
+Some roles might allow you to overwrite local variables. For this a file named
+`~/.ansible-devbox.yml`. If you want to use a vault use the following command:
+
+```
+  ansible-vault --vault-password-file ~/.ansible_vault create ~/.ansible-devbox.yml
+```

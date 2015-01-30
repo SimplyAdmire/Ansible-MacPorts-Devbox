@@ -2,14 +2,39 @@
 
 - stat: path=~/.oh-my-zsh
   register: zsh_path
+  tags:
+    - oh-my-zsh
 
 - name: install oh-my-zsh
   shell: curl -L http://install.ohmyz.sh | sh
   when: (not zsh_path.stat.exists)
+  tags:
+    - oh-my-zsh
 
 - name: Flow oh-my-zsh plugin
   git: repo=git://github.com/sandstorm/oh-my-zsh-flow3-plugin.git dest=~/.oh-my-zsh/custom/plugins/flow
   when: (not zsh_path.stat.exists)
+  tags:
+    - oh-my-zsh
 
 - name: 'Enable flow plugin'
   lineinfile: dest=~/.zshrc regexp="plugins=\(git\)" line="plugins=(git flow)" backrefs=yes state=present
+  tags:
+    - oh-my-zsh
+
+- stat: path=~/.zshrc-include
+  register: zsh_includes_path
+  tags:
+    - oh-my-zsh
+
+- name: Create include file
+  file: dest=~/.zshrc-include state=touch
+  when: (not zsh_includes_path.stat.exists)
+  tags:
+    - oh-my-zsh
+
+- name: Source include file
+  lineinfile: dest=~/.zshrc line="source ~/.zshrc-include" state=present
+  tags:
+    - oh-my-zsh
+

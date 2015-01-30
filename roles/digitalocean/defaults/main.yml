@@ -1,0 +1,5 @@
+---
+
+digitalocean:
+  apiKey: "Insert DigitalOcean api key here"
+  clientId: "Insert DigitalOcean client id here"

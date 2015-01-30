@@ -1,0 +1,16 @@
+---
+
+- include_vars: '{{ item }}'
+  with_first_found:
+   - '~/.ansible-devbox.yml'
+   - '../defaults/main.yml'
+  tags:
+    - digitalocean
+
+- lineinfile: dest=~/.zshrc-include line='export DO_API_KEY="{{ digitalocean.apiKey }}"' regexp='^export DO_API_KEY=.*' state=present
+  tags:
+    - digitalocean
+
+- lineinfile: dest=~/.zshrc-include line='export DO_CLIENT_ID="{{ digitalocean.clientId }}"' regexp='^export DO_CLIENT_ID=.*' state=present
+  tags:
+    - digitalocean
