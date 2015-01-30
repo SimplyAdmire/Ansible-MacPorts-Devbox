@@ -1,0 +1,13 @@
+---
+
+- name: load postgresql
+  command: launchctl load -w /Library/LaunchDaemons/org.macports.postgresql94-server.plist
+  sudo: yes
+
+- name: restart postgresql
+  command: 'launchctl {{ item }} /Library/LaunchDaemons/org.macports.postgresql94-server.plist'
+  with_items:
+    - load -w
+    - unload
+  sudo: yes
+

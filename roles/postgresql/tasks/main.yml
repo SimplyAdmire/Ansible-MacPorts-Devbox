@@ -1,0 +1,57 @@
+---
+
+- macports: name=postgresql94-server state=present
+  sudo: yes
+  tags:
+    - postgresql
+  notify:
+    - load postgresql
+
+- lineinfile: dest=~/.zshrc-include line='export PATH=/opt/local/lib/postgresql94/bin:$PATH'
+  tags:
+    - postgresql
+
+- shell: pip install {{ item }}
+  sudo: yes
+  environment:
+    PATH: /opt/local/lib/postgresql94/bin:{{ ansible_env.PATH }}
+  with_items:
+    - psycopg2
+  tags:
+    - postgresql
+
+- stat: path=/opt/local/var/db/postgresql94/defaultdb
+  register: postgresql_db_path
+  tags:
+    - postgresql
+
+- file: dest=/opt/local/var/db/postgresql94/defaultdb state=directory owner=postgres group=postgres
+  sudo: yes
+  when: (not postgresql_db_path.stat.exists)
+  tags:
+    - postgresql
+
+- shell: su postgres -c '/opt/local/lib/postgresql94/bin/initdb -D /opt/local/var/db/postgresql94/defaultdb'
+  sudo: yes
+  when: (not postgresql_db_path.stat.exists)
+  notify:
+    - restart postgresql
+  tags:
+    - postgresql
+
+- lineinfile: dest=/opt/local/var/db/postgresql94/defaultdb/postgresql.conf line="listen_addresses = 'localhost'"
+  sudo: yes
+  notify:
+    - restart postgresql
+  tags:
+    - postgresql
+
+- meta: flush_handlers
+  tags:
+    - postgresql
+
+- postgresql_user: name=root password=password role_attr_flags=CREATEDB,SUPERUSER
+  sudo: yes
+  sudo_user: postgres
+  tags:
+    - postgresql
