@@ -65,7 +65,7 @@
     - restart php-fpm
 
 # Xdebug settings
-- lineinfile: dest=/opt/local/var/db/php55/xdebug.ini line="xdebug.max_nesting_level = 250"
+- lineinfile: dest=/opt/local/var/db/php55/xdebug.ini line="xdebug.max_nesting_level = 500"
   sudo: yes
   notify:
     - restart php-fpm
