@@ -8,7 +8,7 @@
   shell: curl -sSL https://get.rvm.io | bash -s stable --ruby
   when: (not rvm_path.stat.exists)
 
-- shell: rvm gemdir
+- shell: ~/.rvm/bin/rvm gemdir
   register: rvm_gemdir
   changed_when: false
 
