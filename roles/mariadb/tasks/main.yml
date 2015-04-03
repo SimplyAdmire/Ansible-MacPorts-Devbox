@@ -19,6 +19,15 @@
   tags:
     - mariadb
 
+- name: 'Flush all handlers'
+  meta: flush_handlers
+  tags:
+    - mariadb
+
+- wait_for: path=/opt/local/var/run/mariadb/mysqld.sock
+  tags:
+    - mariadb
+
 - command: "/opt/local/lib/mariadb/bin/mysqladmin -u {{ database_user }} password '{{ database_password }}'"
   tags:
     - mariadb
