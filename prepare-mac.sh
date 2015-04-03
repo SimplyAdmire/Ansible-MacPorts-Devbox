@@ -31,3 +31,8 @@ if [[ $? != 0 ]] ; then
 	read -p "Continue ? [Enter]"
 	echo ""
 fi
+
+chsh -s /bin/zsh
+read -p "Your mac is prepared, now restart your terminal"
+read -p "Continue ? [Enter]"
+exit
