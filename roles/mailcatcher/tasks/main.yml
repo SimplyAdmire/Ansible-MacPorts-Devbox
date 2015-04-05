@@ -1,6 +1,6 @@
 ---
 
-- shell: rvm gemdir
+- shell: ~/.rvm/bin/rvm gemdir
   register: rvm_gemdir
   changed_when: false
 
