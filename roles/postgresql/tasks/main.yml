@@ -7,6 +7,15 @@
   notify:
     - load postgresql
 
+- name: 'Flush all handlers'
+  meta: flush_handlers
+  tags:
+    - postgresql
+
+- wait_for: port=5432 delay=2
+  tags:
+    - postgresql
+
 - lineinfile: dest=~/.zshrc-include line='export PATH=/opt/local/lib/postgresql94/bin:$PATH'
   tags:
     - postgresql
