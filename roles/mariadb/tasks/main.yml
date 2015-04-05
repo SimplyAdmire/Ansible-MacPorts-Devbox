@@ -40,6 +40,7 @@
     - { line: "init-connect='SET NAMES utf8'" }
     - { line: 'character-set-server=utf8' }
     - { line: 'skip-character-set-client-handshake' }
+    - { line: 'max_allowed_packet = 128M' }
   notify:
     - restart mariadb
   tags:
