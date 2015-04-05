@@ -5,7 +5,7 @@
   with_items: packages
   sudo: yes
   notify:
-    - restart php-fpm
+    - start php-fpm
 
 - shell: test -L /usr/bin/php
   register: php_isSymlink
